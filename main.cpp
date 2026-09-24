@@ -1,7 +1,9 @@
 #include <iostream>
 
-#include "src/factorial.hpp"
+#include "src/Board.hpp"
 
 int main() {
-  std::cout << "The factorial of 5 is " << factorial(5) << std::endl;
+    Board board = Board();
+    board.printBoard();
+    return 0;
 }
