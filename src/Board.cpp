@@ -47,20 +47,30 @@ const std::vector<std::string> names = {
 };
 
 Board::Board() {
-    head = new LLNode<std::string>(names[0]);
-    LLNode<std::string>* temp = head;
-    for (int i = 1; i < names.size(); ++i) {
-        temp->setNext(new LLNode<std::string>(names[i]));
-        temp = temp->getNext();
+    list = new LList<std::string>();
+    for (int i = 0 ; i < names.size(); ++i) {
+        list->insert(names[i]);
     }
-    temp->setNext(head);
-    current = head;
+    current = list->getStart();
 }
 
-void Board::move(int spaces) {
+void Board::step() {
+    step(1);
+}
+
+void Board::step(int spaces) {
     for (int i = 0; i < spaces; ++i) {
         current = current->getNext();
     }
+}
+
+int Board::rollDice() {
+     int roll = 0;
+     for (int i = 0; i < 2; ++i) {
+         roll += (rand() % 6) + 1;
+     }
+     step(roll);
+     return roll;
 }
 
 std::string Board::getCurrentSpace() const {
@@ -68,7 +78,7 @@ std::string Board::getCurrentSpace() const {
 }
 
 void Board::printBoard() {
-    LLNode<std::string>* temp = head;
+    LLNode<std::string>* temp = list->getStart();
     std::cout << temp->getData();
     if (temp == current) {
             std::cout << " <-- Your Current Position";
@@ -76,7 +86,7 @@ void Board::printBoard() {
     std::cout << std::endl;
     
     temp = temp->getNext();
-    while (temp != head) {
+    while (temp != list->getStart()) {
         std::cout << temp->getData();
         if (temp == current) {
             std::cout << " <-- Your Current Position";

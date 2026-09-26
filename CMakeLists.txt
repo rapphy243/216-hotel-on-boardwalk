@@ -15,4 +15,4 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(main main.cpp src/LLNode.cpp src/Board.cpp)
+add_executable(main main.cpp src/Board.cpp)

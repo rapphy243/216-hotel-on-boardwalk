@@ -1,13 +1,16 @@
 #include <string>
 #include "LLNode.hpp"
+#include "LList.hpp"
 
 class Board {
 private:
-    LLNode<std::string>* head;
+    LList<std::string>* list;
     LLNode<std::string>* current;
 public:
     Board();
-    void move(int spaces);
+    void step();
+    void step(int spaces);
+    int rollDice();
     std::string getCurrentSpace() const;
     void printBoard();
 };
